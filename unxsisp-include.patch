@@ -1,0 +1,37 @@
+diff -ur unxsisp-1.0/interfaces/admin/makefile unxsisp-1.0.new/interfaces/admin/makefile
+--- unxsisp-1.0/interfaces/admin/makefile	2009-05-26 13:17:07.000000000 +0200
++++ unxsisp-1.0.new/interfaces/admin/makefile	2009-06-12 15:29:04.736150083 +0200
+@@ -10,9 +10,10 @@
+ #
+ 
+ CGINAME= ispAdmin.cgi
++libdir = @libdir@
+ 
+ CFLAGS= -DLinux -Wall
+-LIBS= -L/usr/lib/mysql -lmysqlclient /usr/lib/openisp/libtemplate.a /usr/lib/openisp/libucidr.a -lz -lcrypt -lm -lssl
++LIBS= -L$(libdir)/mysql -lmysqlclient $(libdir)/openisp/libtemplate.a $(libdir)/openisp/libucidr.a -lz -lcrypt -lm -lssl
+ 
+ interface.cgi: main.o customer.o glossary.o invoice.o product.o instance.o ../../cgi.o
+ 	cc main.o customer.o glossary.o invoice.o product.o instance.o ../../cgi.o -o interface.cgi $(LIBS)
+Tylko w unxsisp-1.0.new/interfaces/admin: makefile~
+diff -ur unxsisp-1.0/makefile unxsisp-1.0.new/makefile
+--- unxsisp-1.0/makefile	2009-05-26 13:08:02.000000000 +0200
++++ unxsisp-1.0.new/makefile	2009-06-12 15:25:39.696130391 +0200
+@@ -25,6 +25,7 @@
+ #CFLAGS=-O -DLinux -Wall
+ CFLAGS= -DLinux -Wall
+ RELEASE= 0.1
++libdir = @libdir@
+ 
+ #FreeBSD make support un comment the next two lines. Yes you need both -D and the gmake
+ #define. Also check mysqlrad.h for FreeBSD parts and adjust for your system.
+@@ -33,7 +34,7 @@
+ #CFLAGS= -DLinux -DFreeBSD -Wall 
+ #FreeBSD=1
+ 
+-LIBS= -L/usr/lib/mysql -lmysqlclient /usr/lib/openisp/libtemplate.a -lz -lcrypt -lm -lssl
++LIBS= -L$(libdir)/mysql -lmysqlclient $(libdir)/openisp/libtemplate.a -lz -lcrypt -lm -lssl
+ 
+ all: unxsISP.cgi
+ 
+Tylko w unxsisp-1.0.new/: makefile~
